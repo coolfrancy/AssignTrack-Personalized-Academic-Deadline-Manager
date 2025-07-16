@@ -1,9 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 def constant_check_reminder_schedule():
     from datetime import datetime
     import pytz
-    import sys
-    import os
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))  
     from queries.reminder_schedule import get_all_reminder_schedule
 
     

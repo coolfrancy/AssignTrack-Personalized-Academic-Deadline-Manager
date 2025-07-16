@@ -11,7 +11,7 @@ try:
     twilio_number=os.getenv('number')
     canvas_token=os.getenv('canvas_token')
     school_url='https://mdc.instructure.com/'
-    upcoming_assighnment_list=Upcoming(school_url, canvas_token, 5)
+    upcoming_assighnment_list=Upcoming(school_url, canvas_token, 5, 1)
     message=''.join(upcoming_assighnment_list)
 
     #runs the functions

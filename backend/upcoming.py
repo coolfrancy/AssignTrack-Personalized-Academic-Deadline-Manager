@@ -1,7 +1,19 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 def Upcoming(school_url, token, days_ahead, is_special) -> list:
+    from cryptography.fernet import Fernet
     from canvasapi import Canvas
     import datetime as dt
     import pytz
+    from dotenv import load_dotenv
+
+
+    token_encryption_key=os.getenv('token_encryption_key')
+    fernet=Fernet(token_encryption_key)
+    token = fernet.decrypt(token.encode()).decode()
+
 
 
     try:
@@ -37,14 +49,14 @@ def Upcoming(school_url, token, days_ahead, is_special) -> list:
 
                             #does the check for is_special
                             if is_special==1:
-                                if days_dif>0 and days_dif<=days_ahead:
+                                if days_dif>=0 and days_dif<=days_ahead:
                                     assighn_list.append(f'Due date: {due_at_date_12hr_format}/assignment name: {assignment}/Course name: {course_name}//')
                             else:
                                 if days_dif==days_ahead:
                                     assighn_list.append(f'Due date: {due_at_date_12hr_format}/assignment name: {assignment}/Course name: {course_name}//')
         
         #makes the max amount of returnable assignments to 10
-        return assighn_list[:10]
+        return assighn_list
 
     except Exception as e:
         print(f'Unexpected Error from Upcoming function occured {e}')
