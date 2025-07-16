@@ -30,6 +30,8 @@ load_dotenv()  # Load environment variables from .env file
 
 #check if app is in demo mode
 is_demo_mode = os.environ.get('demo_mode', 'false').lower() in ('true', '1', 'yes')
+#check if auto verify is on
+auto_verify = os.environ.get('auto_verify', 'false').lower() in ('true', '1', 'yes')
 token_encryption_key=os.getenv('token_encryption_key')
 fernet=Fernet(token_encryption_key)
 app_secret_key=os.getenv('app_secret_key')
@@ -71,8 +73,16 @@ def login():
 
         user=get_user_from_db_by_id(user_id, verified=False)
         email=user['email_address']
-        # Redirect to verification page
-        return render_template('acc_creation_verify.html', email=email)
+
+        if auto_verify:
+            rem_session_from_db(user_id, verified=False)
+            ##function that transfers unverified user to verified user
+            print(unverified_to_verified_user(user_id))
+            session.clear()
+            return redirect(url_for('login'))
+        else:
+            # Redirect to verification page
+            return render_template('acc_creation_verify.html', email=email)
 
     else:
         return redirect(url_for('login'))
@@ -454,6 +464,7 @@ def email_edit_page():
 
 @app.route('/account_creation_verify_page', methods=['POST', 'GET'])
 def account_creation_verify_page():
+
     cookie=session.get('pending_session_id')
     user_id=get_user_id_from_session(cookie, verified=False)
     user=get_user_from_db_by_id(user_id, verified=False)
@@ -464,12 +475,13 @@ def account_creation_verify_page():
     verify_code=request.form.get('verify_code')
     send_code=request.form.get('send_code')
 
+
     #add part to get email from session
     email=user['email_address']
     if (send_code is not None and send_code=='True'):
         send_verification_code(email, 'email')
         return render_template('acc_creation_verify.html', email=email)
-
+    
     if verify_code is not None:
         if check_verification_code(email, verify_code, 'email'):
             rem_session_from_db(user_id, verified=False)

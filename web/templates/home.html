@@ -4,12 +4,116 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="tittle">Reminders</h1>
-<form method="GET" action="/login">
-    <button name="login" class='login_button'>Login</button>
-</form>
-
-<form method="POST" action="/create_account">
-    <button class="create_account">Create Account</button>
-</form>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div class="max-w-md w-full space-y-8">
+        <!-- Header Section -->
+        <div class="text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-800 mb-2">
+                Reminders
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600">
+                Stay organized with your assignment reminders
+            </p>
+        </div>
+        
+        <!-- Action Buttons Card -->
+        <div class="bg-white rounded-xl shadow-lg p-8 space-y-6">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">
+                    Get Started
+                </h2>
+                <p class="text-gray-600">
+                    Login to your account or create a new one
+                </p>
+            </div>
+            
+            <!-- Login Button -->
+            <form method="GET" action="/login" class="w-full">
+                <button name="login" type="submit" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <span class="text-lg">Login</span>
+                </button>
+            </form>
+            
+            <!-- Divider -->
+            <div class="relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white text-gray-500">or</span>
+                </div>
+            </div>
+            
+            <!-- Create Account Button -->
+            <form method="POST" action="/create_account" class="w-full">
+                <button type="submit" 
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-green-300">
+                    <span class="text-lg">Create Account</span>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">
+                Why Choose Our Reminder System?
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-800">Smart Notifications</h4>
+                        <p class="text-xs text-gray-600">Get timely reminders via email and text</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-800">Customizable Schedule</h4>
+                        <p class="text-xs text-gray-600">Set your preferred reminder times</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-800">School Integration</h4>
+                        <p class="text-xs text-gray-600">Connect with your school's system</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="flex-shrink-0 w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-800">Multiple Reminders</h4>
+                        <p class="text-xs text-gray-600">Set up to 4 different reminder intervals</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="text-center text-sm text-gray-500 mt-8">
+            <p>Never miss an assignment deadline again!</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
